@@ -1,23 +1,54 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
-
 function App() {
+  const [name, setname] = useState("")
+  const [apple, setapple] = useState("Fuje")
+  const [num, setnum] = useState(0)
+  const [check, setcheck] = useState(false)
+  const [obj, setobj] = useState({
+    name: "",
+    apple: "",
+    num: "",
+    check: "",
+  })
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+
+        <h1>How About Them Apples</h1>
+        <h3>You are submitting the following</h3>
+        <div>
+          <ul>
+            <li>name:{obj.name}</li>
+            <li>apples:{obj.apple}</li>
+            <li>count:{obj.num}</li>
+            <li>gift-wrap:{obj.check + ""}</li>
+          </ul>
+        </div>
+      </div>
+      <div className='name'>
+        <label>name</label>
+        <input onChange={(e) => setname(e.target.value)} />
+      </div>
+      <div className='inputs'>
+        <label >Apples:</label>
+        <select className='apple' onChange={(e) => setapple(e.target.value)}>
+          <option>Fuje</option>
+          <option>Japanes</option>
+        </select>
+        <label >Count:</label>
+        <input className='num' type='number' onChange={(e) => setnum(e.target.value)} />
+        <label >gift-wrap:</label>
+        <input type='checkbox' onClick={() => setcheck(!check)} />
+      </div>
+      <input type='submit' className='submit' onClick={() => {
+        setobj({
+          name: name,
+          apple: apple,
+          num: num,
+          check: check,
+        })
+      }} />
     </div>
   );
 }
