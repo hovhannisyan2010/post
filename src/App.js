@@ -1,18 +1,23 @@
 import { useState } from 'react';
 import './App.css';
 function App() {
-  const [name, setname] = useState("")
-  const [apple, setapple] = useState("Fuje")
-  const [num, setnum] = useState(0)
-  const [check, setcheck] = useState(false)
-  const [obj, setobj] = useState({
+  const [obj, setObj] = useState({
     name: "",
     apple: "",
     num: "",
     check: "",
   })
+  function hendleSubmit(event) {
+    event.preventDefault()
+    setObj({
+      name: event.target.name.value,
+      apple: event.target.select.value,
+      num: event.target.num.value,
+      check: event.target.checkbox.checked
+    })
+  }
   return (
-    <div className="App">
+    <form className="App" onSubmit={hendleSubmit}>
       <div>
 
         <h1>How About Them Apples</h1>
@@ -28,28 +33,21 @@ function App() {
       </div>
       <div className='name'>
         <label>name</label>
-        <input onChange={(e) => setname(e.target.value)} />
+        <input name='name' />
       </div>
       <div className='inputs'>
         <label >Apples:</label>
-        <select className='apple' onChange={(e) => setapple(e.target.value)}>
+        <select className='apple' name='select'>
           <option>Fuje</option>
           <option>Japanes</option>
         </select>
         <label >Count:</label>
-        <input className='num' type='number' onChange={(e) => setnum(e.target.value)} />
+        <input className='num' name='num' type='number' />
         <label >gift-wrap:</label>
-        <input type='checkbox' onClick={() => setcheck(!check)} />
+        <input type='checkbox' name='checkbox'/>
       </div>
-      <input type='submit' className='submit' onClick={() => {
-        setobj({
-          name: name,
-          apple: apple,
-          num: num,
-          check: check,
-        })
-      }} />
-    </div>
+      <button type='submit' className='submit'>submit</button>
+    </form>
   );
 }
 
